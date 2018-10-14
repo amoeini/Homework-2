@@ -1,0 +1,37 @@
+Sub ticker()
+
+Cells(1, 9).Value = "Ticker Name"
+Cells(1, 10).Value = "Total Stock Volume"
+
+Dim ticker_name As String
+Dim stock_total As Double
+Dim stock_row As Integer
+Dim LastRow
+
+stock_total = 0
+stock_row = 2
+
+NumRows = Range("A2", Range("A2").End(xlDown)).Rows.Count
+
+    For i = 2 To NumRows
+    
+        If Cells(i + 1, 1).Value <> Cells(i, 1).Value Then
+       
+            ticker_name = Cells(i, 1).Value
+            stock_total = stock_total + Cells(i, 7).Value
+       
+            Range("I" & stock_row).Value = ticker_name
+            Range("J" & stock_row).Value = stock_total
+       
+            stock_row = stock_row + 1
+            stock_total = 0
+    
+        Else
+        
+            stock_total = stock_total + Cells(i, 7).Value
+        
+        End If
+
+    Next i
+
+End Sub
